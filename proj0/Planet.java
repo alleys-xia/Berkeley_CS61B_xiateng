@@ -30,12 +30,6 @@ public class Planet {
 		double r;
 		dx= this.xxPos-a.xxPos;
 		dy= this.yyPos-a.yyPos;
-		if(dx<0) {
-			dx= -dx;
-		}
-		if(dy<0) {
-			dy= -dy;
-		}
 		r= dx*dx+dy*dy;		
 		return Math.sqrt(r);
 	}
@@ -62,5 +56,39 @@ public class Planet {
 		return fy;
 	}
 
-	
+	public double calcNetForceExertedByX(Planet[] arr) {
+		int length= arr.length;
+		double fx=0;
+		for(int i=0;i<length;++i) {
+			if(!this.equals(arr[i])){
+				fx+=calcForceExertedByX(arr[i]);
+			}
+		}
+			return fx;
+	}
+
+	public double calcNetForceExertedByY(Planet[] arr) {
+		int length= arr.length;
+		double fy=0;
+		for(int i=0;i<length;++i) {
+			if(!this.equals(arr[i])) {
+				fy+=calcForceExertedByY(arr[i]);
+			}
+		}
+			return fy;
+	}
+
+	public void update(double dt, double fx, double fy) {
+		double ax= fx/mass;
+		double ay= fy/mass;
+		xxVel+= ax*dt;
+		yyVel+= ay*dt;
+		xxPos+= xxVel*dt;
+		yyPos+= yyVel*dt;
+	}
+
+	public void draw() {
+		String imgPath= "images/"+imgFileName;
+		StdDraw.picture(xxPos, yyPos, imgPath);
+	}
 }
