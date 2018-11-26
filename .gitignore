@@ -3,3 +3,6 @@ proj1a/out/
 proj1b/.idea/*.xml
 test/out/
 proj1b/out/
+proj1gold/out/
+proj1gold/.idea
+proj1gold/proj1gold.iml
